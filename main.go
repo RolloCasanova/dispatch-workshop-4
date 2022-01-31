@@ -43,6 +43,6 @@ func main() {
 	// Start the server
 	err := server.ListenAndServe()
 	if err != nil {
-		log.Fatalf("starting server: %v", err)
+		log.Printf("starting server: %v", err)
 	}
 }

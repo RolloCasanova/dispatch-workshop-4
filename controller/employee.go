@@ -46,7 +46,8 @@ func (ec employeeController) GetEmployeeByID(w http.ResponseWriter, r *http.Requ
 		w.WriteHeader(http.StatusBadRequest)
 		fmt.Fprintf(w, "invalid id: %v", err)
 
-		log.Fatalf("converting id param into an int: %v", err)
+		log.Printf("converting id param into an int: %v", err)
+		return
 	}
 
 	// get the employee from the usecase
@@ -61,7 +62,7 @@ func (ec employeeController) GetEmployeeByID(w http.ResponseWriter, r *http.Requ
 			w.WriteHeader(http.StatusInternalServerError)
 			fmt.Fprintf(w, "data not initialized")
 
-			log.Fatalf("getting employee: %v", err)
+			log.Printf("getting employee: %v", err)
 		}
 	}
 
@@ -99,7 +100,7 @@ func (ec employeeController) GetAllEmployees(w http.ResponseWriter, r *http.Requ
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprintf(w, "error getting employees")
 
-		log.Fatalf("getting all employees: %v", err)
+		log.Printf("getting all employees: %v", err)
 	}
 
 	// special handling if employees is empty
@@ -141,7 +142,7 @@ func (ec employeeController) CreateEmployee(w http.ResponseWriter, r *http.Reque
 		w.WriteHeader(http.StatusBadRequest)
 		fmt.Fprintf(w, "invalid request body")
 
-		log.Fatalf("decoding request body: %v", err)
+		log.Printf("decoding request body: %v", err)
 	}
 
 	// create the employee in the usecase
@@ -149,7 +150,7 @@ func (ec employeeController) CreateEmployee(w http.ResponseWriter, r *http.Reque
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprintf(w, "error creating employee: %v", err)
-		log.Fatalf("creating employee: %v", err)
+		log.Printf("creating employee: %v", err)
 
 		return
 	}

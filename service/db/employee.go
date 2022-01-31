@@ -43,6 +43,11 @@ func New(em EmployeeMap) employeeDBService {
 		em = db
 	}
 
+	employeesOrder = []int{}
+	for k := range em {
+		employeesOrder = append(employeesOrder, k)
+	}
+
 	return employeeDBService{
 		data: em,
 	}

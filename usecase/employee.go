@@ -16,9 +16,9 @@ type EmployeeDBService interface {
 	CreateEmployee(e model.Employee) error
 }
 
-// employeeRedisService is the interface that wraps the Redis service's methods
+// EmployeeRedisService is the interface that wraps the Redis service's methods
 // UpsertEmployee, ReadEmployee and DeleteEmployeeByID
-type employeeRedisService interface {
+type EmployeeRedisService interface {
 	UpsertEmployee(e model.Employee) error
 	UpsertEmployees(e model.Employees) error
 	ReadEmployee(id int) (*model.Employee, error)
@@ -28,11 +28,11 @@ type employeeRedisService interface {
 // employeeUsecase implements EmployeeService interface.
 type employeeUsecase struct {
 	db EmployeeDBService
-	rd employeeRedisService
+	rd EmployeeRedisService
 }
 
 // New returns a new EmployeeUsecase instance.
-func New(db EmployeeDBService, rd employeeRedisService) employeeUsecase {
+func New(db EmployeeDBService, rd EmployeeRedisService) employeeUsecase {
 	log.Println("In usecase - NewEmployeeUsecase")
 
 	return employeeUsecase{
